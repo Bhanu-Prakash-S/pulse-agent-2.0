@@ -1,0 +1,63 @@
+[
+  {
+    "id": "BC-C-001",
+    "bullhornClientId": "C-001",
+    "name": "Acme Manufacturing Inc.",
+    "creditLimit": 500000,
+    "paymentTerms": "Net30",
+    "paymentMethod": "ACH",
+    "status": "Active",
+    "ytdRevenue": 1240000,
+    "currentARBalance": 612000
+  },
+  {
+    "id": "BC-C-002",
+    "bullhornClientId": "C-002",
+    "name": "TechCorp Solutions",
+    "creditLimit": 600000,
+    "paymentTerms": "Net30",
+    "paymentMethod": "ACH",
+    "status": "Active",
+    "ytdRevenue": 1118000,
+    "currentARBalance": 618000
+  },
+  {
+    "id": "BC-C-003",
+    "bullhornClientId": "C-003",
+    "name": "Dallas Logistics Group",
+    "creditLimit": 300000,
+    "paymentTerms": "Net45",
+    "paymentMethod": "Check",
+    "status": "Active",
+    "ytdRevenue": 594000,
+    "currentARBalance": 372000,
+    "flaggedInvoice": "INV-2026-1043"
+  },
+  {
+    "id": "BC-C-004",
+    "bullhornClientId": "C-004",
+    "name": "Houston Healthcare Partners",
+    "creditLimit": 400000,
+    "paymentTerms": "Net30",
+    "paymentMethod": "ACH",
+    "status": "Active",
+    "ytdRevenue": 532000,
+    "currentARBalance": 341500,
+    "flaggedInvoice": "INV-2026-0892",
+    "collectionStatus": "ESCALATED"
+  },
+  {
+    "id": "BC-C-005",
+    "bullhornClientId": "C-005",
+    "name": "Denver Retail Consortium",
+    "creditLimit": 200000,
+    "paymentTerms": "Net30",
+    "paymentMethod": "Check",
+    "status": "CreditWatch",
+    "ytdRevenue": 213000,
+    "currentARBalance": 98500,
+    "flaggedInvoice": "INV-2026-0741",
+    "collectionStatus": "LEGAL_REVIEW",
+    "note": "94 days overdue. Bad debt risk. Credit hold being evaluated."
+  }
+]

@@ -1,0 +1,62 @@
+{
+  "week1": {
+    "period": "2026-04-10 to 2026-04-16",
+    "totalSubmissions": 198,
+    "totalInterviews": 41,
+    "totalOffers": 12,
+    "totalPlacements": 9,
+    "fillRate": 42.0,
+    "avgTimeToFillDays": 7.2,
+    "submissionToInterviewRatio": 4.83,
+    "interviewToOfferRatio": 3.42,
+    "offerToPlacementRatio": 0.75,
+    "byRecruiter": [
+      {"recruiter": "Sarah Chen",    "submissions": 38, "interviews": 9,  "offers": 3, "placements": 4, "revenue": 68000},
+      {"recruiter": "Marcus Lee",    "submissions": 32, "interviews": 7,  "offers": 2, "placements": 3, "revenue": 54000},
+      {"recruiter": "Jennifer Park", "submissions": 28, "interviews": 6,  "offers": 2, "placements": 2, "revenue": 38000},
+      {"recruiter": "Tom Wilson",    "submissions": 22, "interviews": 4,  "offers": 1, "placements": 2, "revenue": 29000},
+      {"recruiter": "Rachel Adams",  "submissions": 30, "interviews": 7,  "offers": 2, "placements": 3, "revenue": 47000},
+      {"recruiter": "David Kumar",   "submissions": 22, "interviews": 4,  "offers": 1, "placements": 2, "revenue": 31000},
+      {"recruiter": "Lisa Nguyen",   "submissions": 16, "interviews": 3,  "offers": 1, "placements": 1, "revenue": 18000},
+      {"recruiter": "James O'Brien", "submissions": 10, "interviews": 1,  "offers": 0, "placements": 1, "revenue": 14000}
+    ]
+  },
+  "week2": {
+    "period": "2026-04-17 to 2026-04-24",
+    "totalSubmissions": 176,
+    "totalInterviews": 33,
+    "totalOffers": 9,
+    "totalPlacements": 7,
+    "fillRate": 38.0,
+    "avgTimeToFillDays": 8.1,
+    "submissionToInterviewRatio": 5.33,
+    "interviewToOfferRatio": 3.67,
+    "offerToPlacementRatio": 0.78,
+    "byRecruiter": [
+      {"recruiter": "Sarah Chen",    "submissions": 35, "interviews": 8,  "offers": 3, "placements": 4, "revenue": 70000},
+      {"recruiter": "Marcus Lee",    "submissions": 30, "interviews": 7,  "offers": 2, "placements": 3, "revenue": 56000},
+      {"recruiter": "Jennifer Park", "submissions": 25, "interviews": 5,  "offers": 2, "placements": 2, "revenue": 36000},
+      {"recruiter": "Tom Wilson",    "submissions": 14, "interviews": 2,  "offers": 0, "placements": 0, "revenue": 0,    "flag": "UNDERPERFORMING", "note": "0 placements this week vs 2 last week. Significant drop. Coaching required."},
+      {"recruiter": "Rachel Adams",  "submissions": 26, "interviews": 5,  "offers": 2, "placements": 2, "revenue": 39000},
+      {"recruiter": "David Kumar",   "submissions": 20, "interviews": 4,  "offers": 1, "placements": 2, "revenue": 33000},
+      {"recruiter": "Lisa Nguyen",   "submissions": 16, "interviews": 3,  "offers": 1, "placements": 2, "revenue": 24000, "flag": "IMPROVING"},
+      {"recruiter": "James O'Brien", "submissions": 10, "interviews": 1,  "offers": 0, "placements": 0, "revenue": 0,    "flag": "STALLED", "note": "0 placements — 2nd consecutive slow week."}
+    ]
+  },
+  "weekOverWeekSummary": {
+    "submissionsChange": -11.1,
+    "interviewsChange": -19.5,
+    "offersChange": -25.0,
+    "placementsChange": -22.2,
+    "fillRateChange": -4.0,
+    "timeToFillChange": 0.9,
+    "trend": "DECLINING",
+    "note": "Submission volume, interview rate, and placement rate all down week-over-week. Pattern suggests either demand softening or pipeline activity slowdown."
+  },
+  "dallasTeamFillRate": {
+    "week1": {"fillRate": 45.0, "placements": 5, "openOrders": 11},
+    "week2": {"fillRate": 35.0, "placements": 4, "openOrders": 9, "flag": "DROP_22PCT"},
+    "changeWoW": -22.2,
+    "note": "Dallas Logistics Group team fill rate dropped 22% week-over-week. Investigate recruiter activity and pipeline health."
+  }
+}

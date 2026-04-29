@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Business Pulse Agent — Talent Groups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    color-scheme: light;
+    --navy:       #0d2d6e;
+    --navy-mid:   #1a45a0;
+    --navy-light: #2258c4;
+    --gold:       #f5c400;
+    --gold-soft:  #ffd215;
+    --green:      #1a8a5a;
+    --green-bg:   #edf7f2;
+    --amber:      #c47200;
+    --amber-bg:   #fff8ec;
+    --red:        #c02020;
+    --red-bg:     #fdf2f2;
+    --bg:         #f0efe9;
+    --paper:      #ffffff;
+    --ink:        #111827;
+    --ink-mid:    #374151;
+    --ink-light:  #6b7280;
+    --border:     #e5e2db;
+    --font: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+
+  html {
+    background: #f0efe9 !important;
+    forced-color-adjust: none;
+  }
+  body {
+    font-family: var(--font);
+    background: #f0efe9 !important;
+    color: #111827 !important;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+  }
+
+  /* ─── MASTHEAD ─── */
+  .masthead {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, var(--navy-light) 100%);
+    border-radius: 16px;
+    padding: 28px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .masthead::before {
+    content: '';
+    position: absolute; right: -40px; top: -40px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+  .masthead::after {
+    content: '';
+    position: absolute; right: 60px; bottom: -60px;
+    width: 160px; height: 160px; border-radius: 50%;
+    background: rgba(245,196,0,0.10);
+  }
+  .masthead-left { display: flex; align-items: center; gap: 16px; }
+  .masthead-titles { position: relative; z-index: 1; }
+  .masthead-title {
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.3px; line-height: 1.2;
+    margin-top: 2px;
+  }
+  .masthead-meta { text-align: right; position: relative; z-index: 1; flex-shrink: 0; }
+  .masthead-date { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.7); }
+  .masthead-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    margin-top: 6px;
+    background: rgba(245,196,0,0.18); border: 1px solid rgba(245,196,0,0.4);
+    border-radius: 20px; padding: 3px 10px;
+    font-size: 11px; font-weight: 600; color: #ffe566; letter-spacing: 0.04em;
+  }
+  .masthead-badge::before { content: '●'; font-size: 7px; }
+
+  /* ─── KPI STRIP ─── */
+  .kpi-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 12px; margin-bottom: 24px;
+  }
+  .kpi-card {
+    background: #ffffff !important; border: 1px solid #e5e2db;
+    border-radius: 12px; padding: 18px 20px 16px;
+    position: relative; overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .kpi-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(13,45,110,0.08); }
+  .kpi-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: var(--navy); border-radius: 12px 12px 0 0;
+  }
+  .kpi-card.warn::before { background: #e8a000; }
+  .kpi-card.ok::before   { background: var(--green); }
+  .kpi-label {
+    font-size: 10px; font-weight: 600; color: var(--ink-light);
+    text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;
+  }
+  .kpi-value {
+    font-size: 28px; font-weight: 800; color: var(--ink);
+    letter-spacing: -1px; line-height: 1; margin-bottom: 8px;
+  }
+  .kpi-delta {
+    font-size: 11px; font-weight: 600;
+    display: inline-flex; align-items: center; gap: 3px;
+    padding: 2px 7px; border-radius: 20px;
+  }
+  .kpi-delta.up   { background: #edf7f2 !important; color: #1a8a5a !important; }
+  .kpi-delta.down { background: #fdf2f2 !important; color: #c02020 !important; }
+  .kpi-delta.warn { background: #fff8ec !important; color: #c47200 !important; }
+
+  /* ════════════════════════════════════════
+     STATE 1: PRE-GENERATE
+  ════════════════════════════════════════ */
+  #state-pregenerate { display: block; }
+
+  .ready-panel {
+    background: #ffffff !important;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+  .ready-panel-top {
+    padding: 32px 36px;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  }
+  .ready-eyebrow {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.12em; color: var(--navy-light); margin-bottom: 8px;
+  }
+  .ready-headline {
+    font-size: 24px; font-weight: 800; color: var(--ink);
+    letter-spacing: -0.5px; margin-bottom: 10px; line-height: 1.2;
+  }
+  .ready-headline em { color: var(--navy-light); font-style: normal; }
+  .ready-desc {
+    font-size: 13px; color: var(--ink-light); line-height: 1.6; max-width: 420px;
+  }
+  .ready-right { flex-shrink: 0; text-align: center; }
+
+  .btn-generate {
+    background: var(--navy);
+    color: #fff; border: none; border-radius: 10px;
+    padding: 14px 28px;
+    font-family: var(--font); font-size: 14px; font-weight: 700;
+    cursor: pointer; white-space: nowrap;
+    display: inline-flex; align-items: center; gap: 10px;
+    transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+    box-shadow: 0 2px 12px rgba(13,45,110,0.25);
+    letter-spacing: -0.1px;
+  }
+  .btn-generate:hover {
+    background: var(--navy-mid);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(13,45,110,0.32);
+  }
+  .btn-generate:active { transform: translateY(0); }
+  .btn-generate:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .btn-icon {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: rgba(245,196,0,0.2);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .ready-caption {
+    font-size: 11px; color: var(--ink-light); margin-top: 8px;
+  }
+
+  .ready-sources {
+    border-top: 1px solid var(--border);
+    background: #fafaf8;
+    padding: 14px 36px;
+    display: flex; align-items: center; gap: 24px;
+  }
+  .ready-sources-label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--ink-light); flex-shrink: 0;
+  }
+  .sources-list {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .source-chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--paper); border: 1px solid var(--border);
+    border-radius: 20px; padding: 4px 10px;
+    font-size: 11px; font-weight: 600; color: var(--ink-mid);
+  }
+  .source-chip .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green);
+    flex-shrink: 0;
+  }
+  .source-chip .dot.amber { background: var(--amber); }
+
+  /* ════════════════════════════════════════
+     STATE 2: ANALYZING
+  ════════════════════════════════════════ */
+  #state-analyzing { display: none; }
+
+  .analyzing-wrap {
+    background: #ffffff !important;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 48px 40px;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  /* Orbital spinner */
+  .spinner-orbit {
+    width: 80px; height: 80px;
+    position: relative; margin: 0 auto 32px;
+  }
+  .orbit-ring {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: var(--navy);
+    animation: spin 1.2s linear infinite;
+  }
+  .orbit-ring:nth-child(2) {
+    inset: 10px;
+    border-top-color: transparent;
+    border-right-color: var(--gold);
+    animation-duration: 1.8s;
+    animation-direction: reverse;
+  }
+  .orbit-ring:nth-child(3) {
+    inset: 22px;
+    border-top-color: var(--navy-light);
+    border-right-color: transparent;
+    animation-duration: 2.4s;
+  }
+  .orbit-center {
+    position: absolute; inset: 30px;
+    background: var(--navy);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .orbit-center svg { opacity: 0.9; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .analyzing-title {
+    font-size: 20px; font-weight: 800; color: var(--ink);
+    letter-spacing: -0.4px; margin-bottom: 6px;
+  }
+  .analyzing-subtitle {
+    font-size: 13px; color: var(--ink-light); margin-bottom: 36px;
+  }
+
+  /* Steps */
+  .analysis-steps {
+    display: flex; flex-direction: column; gap: 0;
+    max-width: 440px; margin: 0 auto 36px;
+    text-align: left;
+  }
+  .step-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    opacity: 0.35;
+    transition: opacity 0.4s;
+  }
+  .step-row:last-child { border-bottom: none; }
+  .step-row.active  { opacity: 1; }
+  .step-row.done    { opacity: 0.75; }
+
+  .step-icon {
+    width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: #f1f0ee; transition: background 0.3s;
+  }
+  .step-row.active .step-icon { background: #e8eef9; }
+  .step-row.done   .step-icon { background: var(--green-bg); }
+
+  .step-content { flex: 1; }
+  .step-label {
+    font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 2px;
+  }
+  .step-sub { font-size: 11px; color: var(--ink-light); }
+
+  .step-status {
+    font-size: 11px; font-weight: 600;
+    flex-shrink: 0; width: 60px; text-align: right;
+  }
+  .step-row.active .step-status { color: var(--navy-light); }
+  .step-row.done   .step-status { color: var(--green); }
+
+  /* Progress bar */
+  .progress-track {
+    height: 4px; background: var(--border); border-radius: 4px;
+    max-width: 440px; margin: 0 auto;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; border-radius: 4px;
+    background: linear-gradient(90deg, var(--navy), var(--navy-light), var(--gold));
+    width: 0%;
+    transition: width 0.5s ease;
+  }
+
+  /* ════════════════════════════════════════
+     STATE 3: BRIEFING RESULT
+  ════════════════════════════════════════ */
+  #state-briefing { display: none; }
+
+  .briefing-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 28px; gap: 16px;
+  }
+  .briefing-header h2 {
+    font-size: 22px; font-weight: 800; color: var(--ink); letter-spacing: -0.5px;
+  }
+  .briefing-header .line { flex: 1; height: 1px; background: var(--border); }
+  .section-date-sub {
+    font-size: 13px; font-weight: 500; color: var(--ink-light);
+    margin-bottom: 28px; margin-top: -20px;
+  }
+  .btn-regenerate {
+    flex-shrink: 0;
+    background: transparent; border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 14px;
+    font-family: var(--font); font-size: 12px; font-weight: 600;
+    color: var(--ink-light); cursor: pointer;
+    display: inline-flex; align-items: center; gap: 6px;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .btn-regenerate:hover { background: #f5f4f1; border-color: #ccc; color: var(--ink); }
+
+  /* Alert blocks */
+  .alert-block { border-radius: 12px; margin-bottom: 16px; overflow: hidden; border: 1px solid var(--border); }
+  .alert-header {
+    display: flex; align-items: center; gap: 10px; padding: 14px 20px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .alert-block.critical .alert-header { background: var(--red-bg); color: var(--red); border-bottom: 1px solid #f5c6c6; }
+  .alert-block.watch    .alert-header { background: var(--amber-bg); color: var(--amber); border-bottom: 1px solid #ffe0a0; }
+  .alert-block.ontrack  .alert-header { background: var(--green-bg); color: var(--green); border-bottom: 1px solid #b7e4cc; }
+  .alert-icon { font-size: 14px; }
+  .alert-body { padding: 20px 24px; background: #ffffff !important; }
+
+  .finding { margin-bottom: 20px; }
+  .finding:last-child { margin-bottom: 0; }
+  .finding-title {
+    font-size: 14px; font-weight: 700; color: var(--ink);
+    margin-bottom: 8px; display: flex; align-items: baseline; gap: 6px;
+    flex-wrap: wrap;
+  }
+  .finding-title .tag {
+    font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 20px;
+    background: #f1f0ee; color: var(--ink-light);
+    letter-spacing: 0.05em; text-transform: uppercase; flex-shrink: 0;
+  }
+  .finding-items { list-style: none; padding: 0; }
+  .finding-items li {
+    font-size: 13px; color: var(--ink-mid); line-height: 1.6;
+    padding: 4px 0 4px 16px; position: relative;
+    border-bottom: 1px solid #f3f2ef;
+  }
+  .finding-items li:last-child { border-bottom: none; }
+  .finding-items li::before { content: '—'; position: absolute; left: 0; color: var(--border); font-weight: 300; }
+  .finding-items li strong { font-weight: 600; color: var(--ink); }
+  .finding-items li .hl-red   { color: var(--red);   font-weight: 600; }
+  .finding-items li .hl-amber { color: var(--amber); font-weight: 600; }
+  .finding-items li .hl-green { color: var(--green); font-weight: 600; }
+
+  /* On-track block uses same li style */
+  .ontrack-items { list-style: none; padding: 0; margin: 0; }
+  .ontrack-items li {
+    font-size: 13px; color: var(--ink-mid); line-height: 1.6;
+    padding: 4px 0 4px 16px; position: relative;
+    border-bottom: 1px solid #f3f2ef;
+  }
+  .ontrack-items li:last-child { border-bottom: none; }
+  .ontrack-items li::before { content: '—'; position: absolute; left: 0; color: var(--border); font-weight: 300; }
+  .ontrack-items li strong { font-weight: 600; color: var(--ink); }
+  .ontrack-items li .hl-green { color: var(--green); font-weight: 600; }
+
+  .bottom-line {
+    background: #ffffff !important; border: 1px solid #e5e2db; border-radius: 12px;
+    padding: 24px 28px; margin-top: 24px; margin-bottom: 32px;
+    position: relative; overflow: hidden;
+  }
+  .bottom-line::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 5px; background: var(--navy);
+  }
+  .bottom-line-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: #6b7280; margin-bottom: 10px;
+  }
+  .bottom-line-text {
+    font-size: 15px; font-weight: 500; color: #374151; line-height: 1.7;
+  }
+  .bottom-line-text strong { color: #0d2d6e; font-weight: 700; }
+
+  /* Error state */
+  .error-box {
+    background: var(--red-bg); border: 1px solid #f5c6c6; border-radius: 12px;
+    padding: 20px 24px; margin-bottom: 24px;
+    font-size: 13px; color: var(--red); line-height: 1.6;
+  }
+  .error-box strong { font-weight: 700; }
+
+  .data-sources { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 24px; }
+  .data-sources summary {
+    padding: 12px 18px; font-size: 12px; font-weight: 600; color: var(--ink-light);
+    cursor: pointer; display: flex; align-items: center; gap: 8px;
+    background: #ffffff !important; user-select: none; list-style: none;
+  }
+  .data-sources summary::-webkit-details-marker { display: none; }
+  .data-sources summary::before { content: '▸'; font-size: 10px; }
+  details[open] .data-sources summary::before { content: '▾'; }
+  .data-sources-body {
+    padding: 14px 18px; font-size: 12px; color: var(--ink-light); line-height: 1.8;
+    border-top: 1px solid var(--border); background: #fafaf8;
+  }
+
+  .footer {
+    text-align: center; font-size: 11px; color: var(--ink-light);
+    padding-top: 12px; border-top: 1px solid var(--border);
+  }
+  .footer a { color: var(--navy-light); text-decoration: none; font-weight: 600; }
+
+  /* ─── FADE TRANSITION ─── */
+  .state-panel { animation: fadeUp 0.4s ease both; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── FORCE LIGHT MODE ─── */
+  @media (prefers-color-scheme: dark) {
+    html, body { background-color: #f0efe9 !important; color: #111827 !important; }
+    .kpi-card, .ready-panel, .ready-panel-top, .ready-sources,
+    .analyzing-wrap, .alert-body, .alert-block,
+    .generate-panel, .data-sources summary, .data-sources-body,
+    .source-chip, .finding-items li, .ontrack-items li, .bottom-line-text {
+      background-color: #ffffff !important; color: #111827 !important;
+    }
+    .masthead { background: linear-gradient(135deg,#0d2d6e,#1a45a0,#2258c4) !important; }
+    .bottom-line { background-color: #ffffff !important; border: 1px solid #e5e2db !important; }
+    .bottom-line .bottom-line-label { color: #6b7280 !important; }
+    .bottom-line .bottom-line-text { color: #374151 !important; }
+    .bottom-line .bottom-line-text strong { color: #0d2d6e !important; }
+    .masthead-title, .masthead-date, .masthead-badge { color: #ffffff !important; }
+    .alert-block.critical .alert-header { background-color: #fdf2f2 !important; color: #c02020 !important; }
+    .alert-block.watch    .alert-header { background-color: #fff8ec !important; color: #c47200 !important; }
+    .alert-block.ontrack  .alert-header { background-color: #edf7f2 !important; color: #1a8a5a !important; }
+    .kpi-delta.up   { background-color: #edf7f2 !important; color: #1a8a5a !important; }
+    .kpi-delta.down { background-color: #fdf2f2 !important; color: #c02020 !important; }
+    .kpi-delta.warn { background-color: #fff8ec !important; color: #c47200 !important; }
+    .kpi-label, .ready-desc, .ready-caption, .footer, .section-date-sub { color: #6b7280 !important; }
+    .kpi-value, .ready-headline, .finding-title, .analyzing-title { color: #111827 !important; }
+    .ready-eyebrow { color: #2258c4 !important; }
+    .ready-sources { background-color: #fafaf8 !important; }
+    .source-chip { background-color: #ffffff !important; color: #374151 !important; border-color: #e5e2db !important; }
+    .btn-regenerate { background-color: transparent !important; color: #6b7280 !important; border-color: #e5e2db !important; }
+  }
+
+  /* responsive */
+  @media (max-width: 620px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .masthead { flex-direction: column; align-items: flex-start; }
+    .masthead-meta { text-align: left; }
+    .ready-panel-top { flex-direction: column; align-items: flex-start; }
+    .ready-sources { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .briefing-header { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── MASTHEAD (always visible) ── -->
+  <div class="masthead">
+    <div class="masthead-left">
+      <svg viewBox="0 0 220 40" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:36px;width:auto;flex-shrink:0;position:relative;z-index:1;">
+        <rect x="0" y="2"  width="28" height="8" rx="1.5" fill="white"/>
+        <rect x="0" y="16" width="22" height="8" rx="1.5" fill="white"/>
+        <rect x="0" y="30" width="16" height="8" rx="1.5" fill="white"/>
+        <text x="38" y="28" font-family="'Plus Jakarta Sans', Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="white" letter-spacing="-0.3">Talent Groups</text>
+      </svg>
+      <div class="masthead-titles">
+        <div class="masthead-title">Business Pulse Agent</div>
+      </div>
+    </div>
+    <div class="masthead-meta">
+      <div class="masthead-date" id="masthead-date"></div>
+      <div class="masthead-badge">Executive Briefing</div>
+    </div>
+  </div>
+
+  <!-- ── KPI STRIP (always visible) ── -->
+  <div class="kpi-grid">
+    <div class="kpi-card ok" style="background:#ffffff;">
+      <div class="kpi-label">Active Placements</div>
+      <div class="kpi-value">147</div>
+      <span class="kpi-delta up">↑ +3 vs last wk</span>
+    </div>
+    <div class="kpi-card warn" style="background:#ffffff;">
+      <div class="kpi-label">Fill Rate (Wk)</div>
+      <div class="kpi-value">38%</div>
+      <span class="kpi-delta down">↓ −4pts WoW</span>
+    </div>
+    <div class="kpi-card ok" style="background:#ffffff;">
+      <div class="kpi-label">Apr Revenue</div>
+      <div class="kpi-value">$3.47M</div>
+      <span class="kpi-delta warn">99% of target</span>
+    </div>
+    <div class="kpi-card warn" style="background:#ffffff;">
+      <div class="kpi-label">DSO</div>
+      <div class="kpi-value">52<span style="font-size:16px;font-weight:600;letter-spacing:0"> days</span></div>
+      <span class="kpi-delta down">↑ +7 vs target</span>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════
+       STATE 1: PRE-GENERATE
+  ═════════════════════════════ -->
+  <div id="state-pregenerate" class="state-panel">
+
+    <div class="ready-panel" style="background:#ffffff;">
+      <div class="ready-panel-top" style="background:#ffffff;">
+        <div class="ready-left">
+          <div class="ready-eyebrow">Morning Intelligence</div>
+          <h2 class="ready-headline">Ready to brief<br><em>your day?</em></h2>
+          <p class="ready-desc">
+            Pulls live data from Bullhorn ATS and Microsoft Dynamics 365 Business Central, analyzes for anomalies, and generates your personalized executive summary.
+          </p>
+        </div>
+        <div class="ready-right">
+          <button class="btn-generate" id="btn-gen" onclick="startGenerate()">
+            <div class="btn-icon">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M7 1v2M7 11v2M1 7h2M11 7h2M2.93 2.93l1.41 1.41M9.66 9.66l1.41 1.41M2.93 11.07l1.41-1.41M9.66 4.34l1.41-1.41" stroke="#f5c400" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+            </div>
+            Generate Today's Briefing
+          </button>
+          <div class="ready-caption">Takes about 15 seconds</div>
+        </div>
+      </div>
+      <div class="ready-sources" style="background:#fafaf8;">
+        <span class="ready-sources-label">Data Sources</span>
+        <div class="sources-list">
+          <span class="source-chip"><span class="dot"></span>Bullhorn ATS</span>
+          <span class="source-chip"><span class="dot"></span>Dynamics 365 BC</span>
+          <span class="source-chip"><span class="dot amber"></span>Claude AI (Anthropic)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Built by Bhanu Prakash Simhadri &nbsp;·&nbsp; Claude API (Anthropic) &nbsp;·&nbsp; Flask
+    </div>
+
+  </div>
+
+  <!-- ════════════════════════════
+       STATE 2: ANALYZING
+  ═════════════════════════════ -->
+  <div id="state-analyzing" class="state-panel">
+
+    <div class="analyzing-wrap" style="background:#ffffff;">
+
+      <!-- Orbital spinner -->
+      <div class="spinner-orbit">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring"></div>
+        <div class="orbit-center">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M7 1v2M7 11v2M1 7h2M11 7h2M2.93 2.93l1.41 1.41M9.66 9.66l1.41 1.41M2.93 11.07l1.41-1.41M9.66 4.34l1.41-1.41" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="analyzing-title">Analyzing with Claude AI</div>
+      <div class="analyzing-subtitle">Scanning your business data and surfacing what matters</div>
+
+      <!-- Step-by-step checklist -->
+      <div class="analysis-steps" id="analysis-steps">
+        <div class="step-row" id="step-0">
+          <div class="step-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect x="2" y="3" width="12" height="10" rx="1.5" stroke="#6b7280" stroke-width="1.4"/>
+              <path d="M5 7h6M5 9.5h4" stroke="#6b7280" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="step-content">
+            <div class="step-label">Connecting to Bullhorn ATS</div>
+            <div class="step-sub">Fetching placements, job orders &amp; submissions</div>
+          </div>
+          <div class="step-status" id="st-0">—</div>
+        </div>
+
+        <div class="step-row" id="step-1">
+          <div class="step-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <circle cx="8" cy="8" r="5.5" stroke="#6b7280" stroke-width="1.4"/>
+              <path d="M8 5v3.5l2 1.5" stroke="#6b7280" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="step-content">
+            <div class="step-label">Reading Dynamics 365 BC</div>
+            <div class="step-sub">AR aging, invoices &amp; revenue data</div>
+          </div>
+          <div class="step-status" id="st-1">—</div>
+        </div>
+
+        <div class="step-row" id="step-2">
+          <div class="step-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10M8 3l5 5-5 5" stroke="#6b7280" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="step-content">
+            <div class="step-label">Detecting anomalies &amp; risks</div>
+            <div class="step-sub">Cross-referencing KPIs against targets</div>
+          </div>
+          <div class="step-status" id="st-2">—</div>
+        </div>
+
+        <div class="step-row" id="step-3">
+          <div class="step-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 4h8M4 7.5h6M4 11h4" stroke="#6b7280" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="step-content">
+            <div class="step-label">Generating executive briefing</div>
+            <div class="step-sub">Prioritizing actions by business impact</div>
+          </div>
+          <div class="step-status" id="st-3">—</div>
+        </div>
+      </div>
+
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      Built by Bhanu Prakash Simhadri &nbsp;·&nbsp; Claude API (Anthropic) &nbsp;·&nbsp; Flask
+    </div>
+
+  </div>
+
+  <!-- ════════════════════════════
+       STATE 3: BRIEFING RESULT
+  ═════════════════════════════ -->
+  <div id="state-briefing" class="state-panel">
+
+    <div class="briefing-header">
+      <h2>CIO Morning Briefing</h2>
+      <div class="line"></div>
+      <button class="btn-regenerate" onclick="resetToStart()">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M10 6A4 4 0 1 1 6 2a4 4 0 0 1 2.83 1.17L10 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M10 2v2.5H7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Regenerate
+      </button>
+    </div>
+    <p class="section-date-sub" id="briefing-date"></p>
+
+    <!-- Dynamically rendered briefing content -->
+    <div id="briefing-content"></div>
+
+    <!-- DATA SOURCES -->
+    <details class="data-sources">
+      <summary>📂 &nbsp;Data Sources</summary>
+      <div class="data-sources-body">
+        Bullhorn ATS &nbsp;·&nbsp; Microsoft Dynamics 365 Business Central &nbsp;·&nbsp; Claude AI (Anthropic) &nbsp;·&nbsp; Flask
+      </div>
+    </details>
+
+    <div class="footer">
+      Built by Bhanu Prakash Simhadri &nbsp;·&nbsp; Claude API (Anthropic) &nbsp;·&nbsp; Flask
+    </div>
+
+  </div><!-- /state-briefing -->
+
+</div><!-- /page -->
+
+<script>
+  // ── Date display ─────────────────────────────────────────────
+  const dateStr = new Date().toLocaleDateString('en-US', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+  document.getElementById('masthead-date').textContent = dateStr;
+  document.getElementById('briefing-date').textContent = dateStr;
+
+  // ── State transitions ─────────────────────────────────────────
+  function showState(id) {
+    ['state-pregenerate','state-analyzing','state-briefing'].forEach(s => {
+      const el = document.getElementById(s);
+      el.style.display = 'none';
+      el.classList.remove('state-panel');
+    });
+    const target = document.getElementById(id);
+    target.style.display = 'block';
+    void target.offsetWidth;
+    target.classList.add('state-panel');
+  }
+
+  function resetToStart() { showState('state-pregenerate'); }
+
+  // ── Render briefing from structured API response ──────────────
+  function renderFindings(findings) {
+    return findings.map(f => `
+      <div class="finding">
+        <div class="finding-title">${f.title} <span class="tag">${f.tag}</span></div>
+        <ul class="finding-items">
+          ${f.items.map(item => `<li>${item}</li>`).join('')}
+        </ul>
+      </div>
+    `).join('');
+  }
+
+  function renderBriefing(data) {
+    const container = document.getElementById('briefing-content');
+
+    let html = '';
+
+    // Critical block
+    if (data.critical && data.critical.length) {
+      html += `
+        <div class="alert-block critical">
+          <div class="alert-header" style="background:#fdf2f2;color:#c02020;">
+            <span class="alert-icon">🔴</span> Critical — Action Required Today
+          </div>
+          <div class="alert-body" style="background:#ffffff;">
+            ${renderFindings(data.critical)}
+          </div>
+        </div>`;
+    }
+
+    // Watch block
+    if (data.watch && data.watch.length) {
+      html += `
+        <div class="alert-block watch">
+          <div class="alert-header" style="background:#fff8ec;color:#c47200;">
+            <span class="alert-icon">🟡</span> Watch Closely
+          </div>
+          <div class="alert-body" style="background:#ffffff;">
+            ${renderFindings(data.watch)}
+          </div>
+        </div>`;
+    }
+
+    // On track block
+    if (data.on_track && data.on_track.length) {
+      html += `
+        <div class="alert-block ontrack">
+          <div class="alert-header" style="background:#edf7f2;color:#1a8a5a;">
+            <span class="alert-icon">🟢</span> On Track
+          </div>
+          <div class="alert-body" style="background:#ffffff;">
+            <ul class="ontrack-items">
+              ${data.on_track.map(item => `<li>${item}</li>`).join('')}
+            </ul>
+          </div>
+        </div>`;
+    }
+
+    // Bottom line
+    if (data.bottom_line) {
+      html += `
+        <div class="bottom-line" style="background:#ffffff;border:1px solid #e5e2db;">
+          <div class="bottom-line-label" style="color:#6b7280;">Bottom Line</div>
+          <div class="bottom-line-text">${data.bottom_line}</div>
+        </div>`;
+    }
+
+    container.innerHTML = html;
+  }
+
+  function showError(msg) {
+    document.getElementById('briefing-content').innerHTML =
+      `<div class="error-box"><strong>Error generating briefing:</strong> ${msg}<br><br>Check that your ANTHROPIC_API_KEY is set correctly in .env and restart the server.</div>`;
+    showState('state-briefing');
+  }
+
+  // ── Analyze sequence — total animation ~5.2 s ─────────────────
+  const STEPS = [
+    { delay: 0,    dur: 900,  label: 'Connecting…' },
+    { delay: 900,  dur: 1300, label: 'Reading…'    },
+    { delay: 2200, dur: 1300, label: 'Analyzing…'  },
+    { delay: 3500, dur: 1700, label: 'Generating…' },
+  ];
+  const PROGRESS = [0, 25, 55, 78, 100];
+
+  let pendingBriefing = null;
+
+  function startGenerate() {
+    document.getElementById('btn-gen').disabled = true;
+    showState('state-analyzing');
+
+    const fill = document.getElementById('progress-fill');
+    fill.style.width = '0%';
+
+    // Reset all steps
+    STEPS.forEach((_, i) => {
+      const row = document.getElementById('step-' + i);
+      const st  = document.getElementById('st-' + i);
+      row.className = 'step-row';
+      st.textContent = '—';
+      updateIcon(i, false, false);
+    });
+
+    // Kick off the real API call immediately (parallel with animation)
+    pendingBriefing = fetch('/api/generate', { method: 'POST' })
+      .then(r => r.json())
+      .catch(e => ({ ok: false, error: e.message }));
+
+    // Run animation steps
+    STEPS.forEach((step, i) => {
+      setTimeout(() => {
+        document.getElementById('step-' + i).classList.add('active');
+        document.getElementById('st-' + i).textContent = step.label;
+        fill.style.width = PROGRESS[i] + '%';
+        updateIcon(i, true, false);
+      }, step.delay);
+
+      setTimeout(() => {
+        const row = document.getElementById('step-' + i);
+        row.classList.remove('active');
+        row.classList.add('done');
+        document.getElementById('st-' + i).textContent = '✓ Done';
+        updateIcon(i, false, true);
+        fill.style.width = PROGRESS[i + 1] + '%';
+      }, step.delay + step.dur);
+    });
+
+    // Resolve as soon as BOTH animation finishes AND API responds —
+    // whichever is last, with no artificial extra delay.
+    const lastStepEnd = STEPS[STEPS.length - 1].delay + STEPS[STEPS.length - 1].dur;
+    const animPromise = new Promise(res => setTimeout(res, lastStepEnd));
+
+    Promise.all([animPromise, pendingBriefing]).then(([, data]) => {
+      try {
+        if (data.ok) {
+          renderBriefing(data.briefing);
+          showState('state-briefing');
+        } else {
+          showError(data.error || 'Unknown error');
+        }
+      } catch (e) {
+        showError(e.message);
+      }
+      document.getElementById('btn-gen').disabled = false;
+    });
+  }
+
+  function updateIcon(i, active, done) {
+    const color = done ? '#1a8a5a' : (active ? '#2258c4' : '#6b7280');
+    const icons = [
+      `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="${color}" stroke-width="1.4"/><path d="M5 7h6M5 9.5h4" stroke="${color}" stroke-width="1.2" stroke-linecap="round"/></svg>`,
+      `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5.5" stroke="${color}" stroke-width="1.4"/><path d="M8 5v3.5l2 1.5" stroke="${color}" stroke-width="1.2" stroke-linecap="round"/></svg>`,
+      `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="${color}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+      `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4h8M4 7.5h6M4 11h4" stroke="${color}" stroke-width="1.4" stroke-linecap="round"/></svg>`,
+    ];
+    document.getElementById('step-' + i).querySelector('.step-icon').innerHTML = icons[i];
+  }
+</script>
+</body>
+</html>

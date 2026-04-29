@@ -1,0 +1,45 @@
+{
+  "recentPaymentsReceived": [
+    {"date": "2026-04-22", "customer": "Acme Manufacturing Inc.",     "invoiceId": "INV-2026-1098", "amount": 196000, "daysToCollect": 28, "status": "Collected"},
+    {"date": "2026-04-21", "customer": "TechCorp Solutions",          "invoiceId": "INV-2026-1085", "amount": 205900, "daysToCollect": 30, "status": "Collected"},
+    {"date": "2026-04-18", "customer": "Dallas Logistics Group",      "invoiceId": "INV-2026-1022", "amount": 110000, "daysToCollect": 44, "status": "Collected"},
+    {"date": "2026-04-16", "customer": "Acme Manufacturing Inc.",     "invoiceId": "INV-2026-1060", "amount": 182000, "daysToCollect": 27, "status": "Collected"},
+    {"date": "2026-04-14", "customer": "Houston Healthcare Partners", "invoiceId": "INV-2026-1010", "amount": 95000,  "daysToCollect": 31, "status": "Collected"},
+    {"date": "2026-04-10", "customer": "Denver Retail Consortium",    "invoiceId": "INV-2026-0980", "amount": 72000,  "daysToCollect": 38, "status": "Collected"},
+    {"date": "2026-04-08", "customer": "TechCorp Solutions",          "invoiceId": "INV-2026-0972", "amount": 188500, "daysToCollect": 29, "status": "Collected"},
+    {"date": "2026-04-05", "customer": "Acme Manufacturing Inc.",     "invoiceId": "INV-2026-0960", "amount": 174000, "daysToCollect": 26, "status": "Collected"},
+    {"date": "2026-04-03", "customer": "Dallas Logistics Group",      "invoiceId": "INV-2026-0948", "amount": 105500, "daysToCollect": 42, "status": "Collected"}
+  ],
+  "pendingPaymentsExpected": [
+    {"expectedDate": "2026-04-28", "customer": "Acme Manufacturing Inc.",     "invoiceId": "INV-2026-1130", "amount": 202000, "daysUntilDue": 4},
+    {"expectedDate": "2026-04-30", "customer": "TechCorp Solutions",          "invoiceId": "INV-2026-1140", "amount": 218000, "daysUntilDue": 6},
+    {"expectedDate": "2026-05-05", "customer": "Dallas Logistics Group",      "invoiceId": "INV-2026-1120", "amount": 115000, "daysUntilDue": 11},
+    {"expectedDate": "2026-05-10", "customer": "Houston Healthcare Partners", "invoiceId": "INV-2026-1155", "amount": 98000,  "daysUntilDue": 16}
+  ],
+  "overdueUnresolved": [
+    {
+      "customer": "Houston Healthcare Partners",
+      "invoiceId": "INV-2026-0892",
+      "amount": 184000,
+      "daysOverdue": 67,
+      "lastContactDate": "2026-04-10",
+      "status": "Collections escalated — no response"
+    },
+    {
+      "customer": "Denver Retail Consortium",
+      "invoiceId": "INV-2026-0741",
+      "amount": 98500,
+      "daysOverdue": 94,
+      "lastContactDate": "2026-04-01",
+      "status": "Legal review initiated — client unresponsive"
+    },
+    {
+      "customer": "Dallas Logistics Group",
+      "invoiceId": "INV-2026-1043",
+      "amount": 42000,
+      "daysOverdue": 34,
+      "lastContactDate": "2026-04-18",
+      "status": "Second reminder sent — awaiting response"
+    }
+  ]
+}

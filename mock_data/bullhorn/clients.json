@@ -1,0 +1,57 @@
+[
+  {
+    "id": "C-001",
+    "name": "Acme Manufacturing Inc.",
+    "industry": "Manufacturing",
+    "status": "Active",
+    "accountManager": "Sarah Chen",
+    "city": "Houston",
+    "state": "TX",
+    "activeContracts": 42,
+    "openJobOrders": 9
+  },
+  {
+    "id": "C-002",
+    "name": "TechCorp Solutions",
+    "industry": "Technology",
+    "status": "Active",
+    "accountManager": "Marcus Lee",
+    "city": "Dallas",
+    "state": "TX",
+    "activeContracts": 38,
+    "openJobOrders": 11
+  },
+  {
+    "id": "C-003",
+    "name": "Dallas Logistics Group",
+    "industry": "Logistics",
+    "status": "Active",
+    "accountManager": "Jennifer Park",
+    "city": "Dallas",
+    "state": "TX",
+    "activeContracts": 31,
+    "openJobOrders": 9
+  },
+  {
+    "id": "C-004",
+    "name": "Houston Healthcare Partners",
+    "industry": "Healthcare",
+    "status": "Active",
+    "accountManager": "Rachel Adams",
+    "city": "Houston",
+    "state": "TX",
+    "activeContracts": 24,
+    "openJobOrders": 6
+  },
+  {
+    "id": "C-005",
+    "name": "Denver Retail Consortium",
+    "industry": "Retail",
+    "status": "Active",
+    "accountManager": "David Kumar",
+    "city": "Denver",
+    "state": "CO",
+    "activeContracts": 12,
+    "openJobOrders": 3
+  }
+]

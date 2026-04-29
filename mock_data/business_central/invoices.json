@@ -1,0 +1,109 @@
+{
+  "summary": {
+    "totalInvoicesRaised": 34,
+    "totalValueRaised": 3470500,
+    "totalCollected": 1429000,
+    "totalOutstanding": 2041500,
+    "grossMarginPct": 29.3,
+    "dsoDays": 52,
+    "dsoTarget": 45,
+    "monthlyRevenueTarget": 3500000,
+    "monthlyRevenueCurrent": 3470500,
+    "monthlyRevenueAttainmentPct": 99.1,
+    "weeklyRunRate": 867625,
+    "weeklyRunRateTarget": 875000
+  },
+  "arAging": {
+    "current_0_30":  {"amount": 1247000, "pct": 61.1, "invoiceCount": 18},
+    "overdue_31_60": {"amount": 512000,  "pct": 25.1, "invoiceCount": 8},
+    "overdue_61_90": {"amount": 184000,  "pct": 9.0,  "invoiceCount": 1, "flag": "ESCALATE",   "client": "Houston Healthcare Partners"},
+    "overdue_90plus":{"amount": 98500,   "pct": 4.8,  "invoiceCount": 1, "flag": "BAD_DEBT_RISK","client": "Denver Retail Consortium"},
+    "total":         {"amount": 2041500, "invoiceCount": 28}
+  },
+  "flaggedInvoices": [
+    {
+      "invoiceId": "INV-2026-0892",
+      "customerId": "BC-C-004",
+      "customerName": "Houston Healthcare Partners",
+      "invoiceDate": "2026-02-15",
+      "dueDate": "2026-03-17",
+      "amount": 184000,
+      "remainingAmount": 184000,
+      "daysOverdue": 67,
+      "status": "Overdue",
+      "flag": "CRITICAL",
+      "action": "Escalate to collections immediately",
+      "note": "No payment or response in 67 days. Collections team engaged but no resolution."
+    },
+    {
+      "invoiceId": "INV-2026-0741",
+      "customerId": "BC-C-005",
+      "customerName": "Denver Retail Consortium",
+      "invoiceDate": "2026-01-20",
+      "dueDate": "2026-02-19",
+      "amount": 98500,
+      "remainingAmount": 98500,
+      "daysOverdue": 94,
+      "status": "Overdue",
+      "flag": "BAD_DEBT_RISK",
+      "action": "Consider credit hold and legal escalation",
+      "note": "94 days overdue. Client unresponsive. Legal review initiated."
+    },
+    {
+      "invoiceId": "INV-2026-1043",
+      "customerId": "BC-C-003",
+      "customerName": "Dallas Logistics Group",
+      "invoiceDate": "2026-03-21",
+      "dueDate": "2026-04-05",
+      "amount": 42000,
+      "remainingAmount": 42000,
+      "daysOverdue": 34,
+      "status": "Overdue",
+      "flag": "WATCH",
+      "action": "Send second payment reminder",
+      "note": "Net45 terms. 34 days overdue but within watch window. Follow up needed."
+    }
+  ],
+  "billingGapInvoices": [],
+  "week1Invoices": {
+    "period": "2026-04-10 to 2026-04-16",
+    "count": 18,
+    "totalValue": 1847500,
+    "byClient": [
+      {"client": "Acme Manufacturing Inc.",      "invoiceCount": 5, "value": 588000},
+      {"client": "TechCorp Solutions",           "invoiceCount": 5, "value": 618500},
+      {"client": "Dallas Logistics Group",       "invoiceCount": 4, "value": 330000},
+      {"client": "Houston Healthcare Partners",  "invoiceCount": 3, "value": 221000},
+      {"client": "Denver Retail Consortium",     "invoiceCount": 1, "value": 90000}
+    ]
+  },
+  "week2Invoices": {
+    "period": "2026-04-17 to 2026-04-24",
+    "count": 16,
+    "totalValue": 1623000,
+    "billingGapNote": "3 active placements (PL-0841, PL-0902, PL-0917) appear in Bullhorn but have NO corresponding invoice for week ending Apr 18. Estimated unbilled: ~$31,500.",
+    "byClient": [
+      {"client": "Acme Manufacturing Inc.",      "invoiceCount": 4, "value": 524000},
+      {"client": "TechCorp Solutions",           "invoiceCount": 4, "value": 499500},
+      {"client": "Dallas Logistics Group",       "invoiceCount": 3, "value": 276000},
+      {"client": "Houston Healthcare Partners",  "invoiceCount": 3, "value": 205500},
+      {"client": "Denver Retail Consortium",     "invoiceCount": 2, "value": 118000}
+    ]
+  },
+  "weeklyRevenueTrend": [
+    {"week": "2026-04-07", "revenue": 891000, "target": 875000, "variance": 16000,  "status": "ABOVE"},
+    {"week": "2026-04-14", "revenue": 873500, "target": 875000, "variance": -1500,  "status": "ON_TRACK"},
+    {"week": "2026-04-21", "revenue": 867625, "target": 875000, "variance": -7375,  "status": "SLIGHTLY_BELOW"}
+  ],
+  "monthToDateKPIs": {
+    "revenue":            3470500,
+    "target":             3500000,
+    "attainmentPct":      99.1,
+    "grossMarginPct":     29.3,
+    "grossMarginTarget":  28.0,
+    "dso":                52,
+    "dsoTarget":          45,
+    "invoiceAccuracyPct": 97.2,
+    "onTimeInvoicingPct": 94.8
+  }
+}

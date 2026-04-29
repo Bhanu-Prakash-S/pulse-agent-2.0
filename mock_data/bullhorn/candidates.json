@@ -1,0 +1,12 @@
+[
+  {"id": "CAND-1001", "name": "Raj Patel", "title": "Senior C++ Developer", "status": "Active", "availability": "2026-05-01", "skills": ["C++", "Python", "Linux"], "source": "LinkedIn"},
+  {"id": "CAND-1002", "name": "Emily Zhang", "title": "DevOps Engineer", "status": "Active", "availability": "Immediate", "skills": ["Kubernetes", "Docker", "Azure"], "source": "Referral"},
+  {"id": "CAND-1003", "name": "Carlos Mendez", "title": "QA Lead", "status": "Active", "availability": "2026-04-28", "skills": ["Selenium", "JIRA", "Python"], "source": "Job Board"},
+  {"id": "CAND-1004", "name": "Priya Sharma", "title": ".NET Developer", "status": "Active", "availability": "Immediate", "skills": [".NET", "C#", "SQL Server"], "source": "Direct"},
+  {"id": "CAND-1005", "name": "James Okonkwo", "title": "Data Analyst", "status": "Active", "availability": "2026-05-05", "skills": ["Power BI", "SQL", "Python"], "source": "LinkedIn"},
+  {"id": "CAND-1006", "name": "Mei Lin", "title": "IT Manager", "status": "Placed", "availability": null, "skills": ["ITIL", "Azure", "Team Leadership"], "source": "Referral"},
+  {"id": "CAND-1007", "name": "Derek Hill", "title": "Warehouse Manager", "status": "Active", "availability": "Immediate", "skills": ["WMS", "Inventory", "Team Leadership"], "source": "Job Board"},
+  {"id": "CAND-1008", "name": "Anita Rao", "title": "RN - ICU", "status": "Active", "availability": "2026-04-30", "skills": ["ICU", "ACLS", "Epic EHR"], "source": "Healthcare Board"},
+  {"id": "CAND-1009", "name": "Tyler Brooks", "title": "Retail Store Manager", "status": "Active", "availability": "Immediate", "skills": ["Retail Ops", "P&L", "Team Building"], "source": "Referral"},
+  {"id": "CAND-1010", "name": "Sandra Kim", "title": "Sr. Software Engineer", "status": "Active", "availability": "2026-05-12", "skills": ["Java", "Spring Boot", "Microservices"], "source": "LinkedIn"}
+]

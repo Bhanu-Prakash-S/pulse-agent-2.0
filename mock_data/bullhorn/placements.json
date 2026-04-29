@@ -1,0 +1,74 @@
+{
+  "summary": {
+    "totalActivePlacements": 147,
+    "totalContractors": 147,
+    "weeklyBillableHours": 5488,
+    "avgBillRate": 118.5,
+    "avgPayRate": 82.3,
+    "avgMarginPct": 30.5,
+    "projectedWeeklyRevenue": 650328
+  },
+  "byClient": [
+    {"clientId": "C-001", "clientName": "Acme Manufacturing Inc.", "activePlacements": 42, "weeklyHours": 1568, "avgBillRate": 125.0, "weeklyRevenue": 196000},
+    {"clientId": "C-002", "clientName": "TechCorp Solutions",      "activePlacements": 38, "weeklyHours": 1420, "avgBillRate": 145.0, "weeklyRevenue": 205900},
+    {"clientId": "C-003", "clientName": "Dallas Logistics Group",  "activePlacements": 31, "weeklyHours": 1158, "avgBillRate": 95.0,  "weeklyRevenue": 110010},
+    {"clientId": "C-004", "clientName": "Houston Healthcare Partners", "activePlacements": 24, "weeklyHours": 896,  "avgBillRate": 110.0, "weeklyRevenue": 98560},
+    {"clientId": "C-005", "clientName": "Denver Retail Consortium", "activePlacements": 12, "weeklyHours": 448,  "avgBillRate": 88.0,  "weeklyRevenue": 39424}
+  ],
+  "byRecruiter": [
+    {"recruiter": "Sarah Chen",    "activePlacements": 28, "weeklyRevenue": 175000},
+    {"recruiter": "Marcus Lee",    "activePlacements": 24, "weeklyRevenue": 148000},
+    {"recruiter": "Jennifer Park", "activePlacements": 22, "weeklyRevenue": 112000},
+    {"recruiter": "Tom Wilson",    "activePlacements": 18, "weeklyRevenue": 89000},
+    {"recruiter": "Rachel Adams",  "activePlacements": 21, "weeklyRevenue": 98000},
+    {"recruiter": "David Kumar",   "activePlacements": 16, "weeklyRevenue": 76000},
+    {"recruiter": "Lisa Nguyen",   "activePlacements": 12, "weeklyRevenue": 58000},
+    {"recruiter": "James O'Brien", "activePlacements": 6,  "weeklyRevenue": 28000}
+  ],
+  "billingGaps": [
+    {
+      "placementId": "PL-0841",
+      "candidateName": "Kevin Tran",
+      "clientName": "TechCorp Solutions",
+      "recruiter": "Marcus Lee",
+      "billRate": 140.0,
+      "weeklyHours": 40,
+      "estimatedUnbilled": 5600,
+      "weekEnding": "2026-04-18",
+      "note": "Placement active in Bullhorn — no corresponding invoice found in Business Central"
+    },
+    {
+      "placementId": "PL-0902",
+      "candidateName": "Farah Nasser",
+      "clientName": "Acme Manufacturing Inc.",
+      "recruiter": "Sarah Chen",
+      "billRate": 115.0,
+      "weeklyHours": 40,
+      "estimatedUnbilled": 4600,
+      "weekEnding": "2026-04-18",
+      "note": "Placement active in Bullhorn — no corresponding invoice found in Business Central"
+    },
+    {
+      "placementId": "PL-0917",
+      "candidateName": "Liam O'Connor",
+      "clientName": "Dallas Logistics Group",
+      "recruiter": "Jennifer Park",
+      "billRate": 92.0,
+      "weeklyHours": 46,
+      "estimatedUnbilled": 4232,
+      "weekEnding": "2026-04-18",
+      "note": "Placement active in Bullhorn — no corresponding invoice found in Business Central"
+    }
+  ],
+  "weeklyTrend": [
+    {"week": "2026-04-07", "newPlacements": 9,  "endedPlacements": 3, "netChange": 6,  "totalActive": 144},
+    {"week": "2026-04-14", "newPlacements": 9,  "endedPlacements": 4, "netChange": 5,  "totalActive": 149},
+    {"week": "2026-04-21", "newPlacements": 7,  "endedPlacements": 9, "netChange": -2, "totalActive": 147}
+  ],
+  "upcomingEnds": [
+    {"placementId": "PL-0511", "candidateName": "Omar Hassan",    "clientName": "TechCorp Solutions",       "endDate": "2026-04-30", "daysRemaining": 6,  "billRate": 155.0, "redeploymentStatus": "No action taken"},
+    {"placementId": "PL-0498", "candidateName": "Grace Park",     "clientName": "Acme Manufacturing Inc.",  "endDate": "2026-05-02", "daysRemaining": 8,  "billRate": 120.0, "redeploymentStatus": "Extension requested"},
+    {"placementId": "PL-0502", "candidateName": "Daniel Reyes",   "clientName": "Dallas Logistics Group",   "endDate": "2026-05-05", "daysRemaining": 11, "billRate": 98.0,  "redeploymentStatus": "No action taken"},
+    {"placementId": "PL-0519", "candidateName": "Yuki Tanaka",    "clientName": "Houston Healthcare Partners","endDate": "2026-05-07","daysRemaining": 13, "billRate": 115.0, "redeploymentStatus": "In discussion"}
+  ]
+}
