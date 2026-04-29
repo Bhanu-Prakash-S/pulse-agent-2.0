@@ -1,5 +1,7 @@
 # 🏢 Talent Groups — Business Pulse Agent 2.0
 
+**[Live Demo →](https://pulse-agent-2-0.vercel.app/)**
+
 An AI agent that synthesizes Bullhorn ATS and Microsoft Dynamics 365 Business Central data into a single, concise executive briefing for the CIO — surfacing billing gaps, AR anomalies, recruiter performance drops, and aged job orders across both systems.
 
 ## What It Does
